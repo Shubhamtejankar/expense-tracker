@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker Pro</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💰 Expense Tracker Dashboard</h1>
+
+<div class="form-box">
+
+<input id="title" placeholder="Title">
+<input id="amount" type="number" placeholder="Amount">
+<input id="category" placeholder="Category">
+
+<select id="type">
+<option value="Expense">Expense</option>
+<option value="Income">Income</option>
+</select>
+
+<button onclick="addExpense()">Add</button>
+
+</div>
+
+
+<div class="summary">
+
+<div class="card">
+<h3>Total Expense</h3>
+<p id="totalExpense">0</p>
+</div>
+
+<div class="card">
+<h3>Total Income</h3>
+<p id="totalIncome">0</p>
+</div>
+
+</div>
+
+
+<div class="chart">
+
+<canvas id="myChart"></canvas>
+
+</div>
+
+
+<div class="records">
+
+<h2>All Records</h2>
+
+<ul id="expenseList">
+
+{% for e in expenses %}
+
+<li>
+<b>{{e.title}}</b> — ₹{{e.amount}} ({{e.category}})
+
+<button onclick="deleteExpense('{{ e.id }}')">❌</button>
+</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
